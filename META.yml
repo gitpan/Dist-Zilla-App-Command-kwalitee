@@ -22,4 +22,4 @@ requires:
 resources:
   homepage: https://github.com/neilbowers/Dist-Zilla-App-Command-kwalitee
   repository: https://github.com/neilbowers/Dist-Zilla-App-Command-kwalitee.git
-version: '0.02'
+version: '0.03'

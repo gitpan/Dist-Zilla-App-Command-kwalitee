@@ -1,11 +1,10 @@
 package Dist::Zilla::App::Command::kwalitee;
-$Dist::Zilla::App::Command::kwalitee::VERSION = '0.02';
+$Dist::Zilla::App::Command::kwalitee::VERSION = '0.03';
 use 5.008003;
 use strict;
 use warnings;
 
 use Dist::Zilla::App -command;
-use App::CPANTS::Lint 0.03;
 
 sub abstract { 'run CPANTS kwalitee check on your dist' }
 
@@ -13,17 +12,17 @@ sub opt_spec {
 
     [
         'core|c', 'core kwalitee tests only',
-        { default => 'default' }
+        { default => 0 }
     ],
 
     [
         'experimental|e', 'include experimental metrics',
-        { default => 'default' }
+        { default => 0 },
     ],
 
     [
         'verbose|v', 'request verbose output',
-        { default => 'default' }
+        { default => 0 }
     ],
 
 }
@@ -31,8 +30,11 @@ sub opt_spec {
 sub execute {
     my ($self, $opt, $arg) = @_;
 
+    require App::CPANTS::Lint;
+    App::CPANTS::Lint->VERSION('0.03');
+
     my $tgz = $self->zilla->build_archive;
-    my $linter = App::CPANTS::Lint->new();
+    my $linter = App::CPANTS::Lint->new(experimental => $opt->experimental);
     $linter->lint($tgz);
     $linter->output_report;
 }
