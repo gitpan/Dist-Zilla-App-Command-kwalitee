@@ -20,7 +20,7 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Dist::Zilla::App::Command::kwalitee",
   "PREREQ_PM" => {
-    "App::CPANTS::Lint" => 0,
+    "App::CPANTS::Lint" => "0.03",
     "Dist::Zilla::App" => 0,
     "strict" => 0,
     "warnings" => 0
@@ -28,7 +28,7 @@ my %WriteMakefileArgs = (
   "TEST_REQUIRES" => {
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.01",
+  "VERSION" => "0.02",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -36,7 +36,7 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "App::CPANTS::Lint" => 0,
+  "App::CPANTS::Lint" => "0.03",
   "Dist::Zilla::App" => 0,
   "Test::More" => "0.88",
   "strict" => 0,

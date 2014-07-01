@@ -1,23 +1,28 @@
 package Dist::Zilla::App::Command::kwalitee;
-$Dist::Zilla::App::Command::kwalitee::VERSION = '0.01';
+$Dist::Zilla::App::Command::kwalitee::VERSION = '0.02';
 use 5.008003;
 use strict;
 use warnings;
 
 use Dist::Zilla::App -command;
-use App::CPANTS::Lint;
+use App::CPANTS::Lint 0.03;
 
 sub abstract { 'run CPANTS kwalitee check on your dist' }
 
 sub opt_spec {
 
     [
-        'verbose|v', 'request verbose output',
+        'core|c', 'core kwalitee tests only',
         { default => 'default' }
     ],
 
     [
-        'core|c', 'core kwalitee tests only',
+        'experimental|e', 'include experimental metrics',
+        { default => 'default' }
+    ],
+
+    [
+        'verbose|v', 'request verbose output',
         { default => 'default' }
     ],
 
@@ -44,7 +49,8 @@ Dist::Zilla::App::Command::kwalitee - calculate CPANTS kwalitee score for your d
 
 =head1 SYNOPSIS
 
- dzil kwalitee [ --core ] [ --verbose ]
+ dzil kwalitee [ --core | -c ] [ --experimental | -e ]
+               [ --verbose | -v ]
 
 =head1 DESCRIPTION
 
@@ -73,6 +79,9 @@ It is the core of the L<cpants_lint.pl> script.
 
 L<Module::CPANTS::Analyse> is the module behind L<App::CPANTS::Lint>,
 which actually does the analysis.
+
+L<Dist::Zilla::Plugin::Test::Kwalitee> is a plugin that generates a
+release test using L<Test::Kwalitee>.
 
 L<CPANTS|http://cpants.cpanauthors.org> is the website where you
 can see the Kwalitee score for all distributions on CPAN.
